@@ -9,6 +9,7 @@ export default function() {
   const ASPECT = WIDTH / HEIGHT;
   const camera = new THREE.PerspectiveCamera(60, ASPECT, 1, 10000);
   camera.position.y = UNIT_SIZE * 0.2;
+  camera.position.z = 5;
 
   scene.add(camera);
 
