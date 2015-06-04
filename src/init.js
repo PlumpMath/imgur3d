@@ -11,7 +11,7 @@ export default function() {
   const ASPECT = WIDTH / HEIGHT;
   const camera = new THREE.PerspectiveCamera(60, ASPECT, 1, 10000);
   camera.position.y = UNIT_SIZE * 0.2;
-  camera.position.z = 500;
+  camera.position.z = UNIT_SIZE * 0.2;
 
   scene.add(camera);
 
@@ -22,7 +22,7 @@ export default function() {
   controls.lookSpeed = LOOKSPEED;
   controls.noFly = true;
 
-  const renderer = new THREE.WebGLRenderer();
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(WIDTH, HEIGHT);
 
   renderer.domElement.style.backgroundColor = 'rgb(0, 0, 150)';
