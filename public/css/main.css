@@ -1,0 +1,11 @@
+.HUD-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 999;
+  color: white;
+}
+
+HUD-info {
+  font-weight: bold;
+}

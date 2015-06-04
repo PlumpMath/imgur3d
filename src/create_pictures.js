@@ -31,6 +31,8 @@ export default async function(scene) {
     let mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
     mesh.position.set(getRandomInt(0, 1600), getRandomInt(0, 400), getRandomInt(10, 1000));
     mesh.lookAt(new THREE.Vector3(0, 0, 0));
+    mesh.name = 'image';
+    mesh.title = images[i].title;
 
     scene.add(mesh);
   }

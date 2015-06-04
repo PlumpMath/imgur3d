@@ -3,9 +3,11 @@ import init from './init';
 import setupScene from './scene';
 import animate from './animate';
 import createPictures from './create_pictures';
+import createHUD from './create_hud';
 
 const { scene, camera, renderer, controls, clock } = init();
+const HUD = createHUD();
 setupScene(scene);
 createPictures(scene);
-animate(scene, camera, renderer, controls, clock);
+animate(scene, camera, renderer, controls, clock, HUD);
 
