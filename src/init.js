@@ -24,4 +24,6 @@ export default function() {
 
   renderer.domElement.style.backgroundColor = 'rgb(0, 0, 150)';
   document.body.appendChild(renderer.domElement);
+
+  return { scene, camera, renderer, controls };
 }
