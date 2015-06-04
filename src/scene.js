@@ -10,13 +10,6 @@ export default function(scene) {
   );
   scene.add(floor);
 
-  const cube = new THREE.Mesh(
-    new THREE.BoxGeometry(100, 100, 100),
-    new THREE.MeshLambertMaterial({ color: 0x00FF00 })
-  );
-  cube.position.set(0, 50, 0);
-  scene.add(cube);
-
   const directionalLight1 = new THREE.DirectionalLight(0xFFFFFF, 0.7);
   directionalLight1.position.set(0.5, 1, 0.5);
   scene.add(directionalLight1);
@@ -24,4 +17,7 @@ export default function(scene) {
   const directionalLight2 = new THREE.DirectionalLight(0xFFFFFF, 0.5);
   directionalLight2.position.set(-0.5, -1, -0.5);
   scene.add(directionalLight2);
+
+  const hemisphereLight = new THREE.HemisphereLight(0xFFFFFF, 0x000000, 0.8);
+  scene.add(hemisphereLight);
 }
