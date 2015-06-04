@@ -1,3 +1,3 @@
-import THREE from 'three';
+import init from './init';
 
-console.log('hello world!');
+init();
