@@ -1,5 +1,12 @@
 import init from './init';
+import setupScene from './scene';
+import animate from './animate';
+
 const { scene, camera, renderer, controls } = init();
+setupScene(scene);
+animate(scene, camera, renderer);
+
+
 
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
