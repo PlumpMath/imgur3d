@@ -12,7 +12,7 @@ export default function(scene) {
 
   const cube = new THREE.Mesh(
     new THREE.BoxGeometry(100, 100, 100),
-    new THREE.MeshBasicMaterial({ color: 0x00FF00 })
+    new THREE.MeshLambertMaterial({ color: 0x00FF00 })
   );
   cube.position.set(0, 50, 0);
   scene.add(cube);
