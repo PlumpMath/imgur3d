@@ -1,14 +1,14 @@
 import THREE from 'three';
 import FirstPersonControls from './first_person_controls';
+import { UNIT_SIZE, WIDTH, HEIGHT } from './constants';
 
 export default function() {
   const scene = new THREE.Scene();
   scene.fog = THREE.FogExp2(0xD6F1FF, 0.0005);
 
-  const WIDTH = window.innerWidth;
-  const HEIGHT = window.innerHeight;
   const ASPECT = WIDTH / HEIGHT;
   const camera = new THREE.PerspectiveCamera(60, ASPECT, 1, 10000);
+  camera.position.y = UNIT_SIZE * 0.2;
 
   scene.add(camera);
 
