@@ -1,1 +1,8 @@
 node_modules/**
+.DS_Store
+npm-debug.log
+public/app.js
+
+# IntelliJ IDEA files
+.idea
+*.iml
