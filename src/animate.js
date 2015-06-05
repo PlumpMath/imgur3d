@@ -11,7 +11,7 @@ export default function(scene, camera, renderer, controls, clock, HUD) {
 
     let closestImage = {
       distance: 1000,
-      title: null
+      info: null
     };
 
     scene.traverse((obj) => {
@@ -21,15 +21,24 @@ export default function(scene, camera, renderer, controls, clock, HUD) {
     
       if (currentImageDistance < closestImage.distance) {
         closestImage.distance = currentImageDistance;
-        closestImage.title = obj.title;
+        closestImage.info = obj.info;
       }
     });
 
-    const closestMessage = closestImage.distance < 100 ?
-      `${closestImage.distance} - ${closestImage.title}` :
-      'get closer to an image';
+    const op = closestImage.info.account_url || 'anonymous';
+    const closestMessage = closestImage.info ?
+      `<a target="_blank" href="http://imgur.com/gallery/${closestImage.info.id}">${closestImage.info.title}</a> by <a target="_blank" href="http://imgur.com/user/${op}">${op}</a>` :
+      null;
 
-    HUD.querySelector('.HUD-info').textContent = closestMessage;
+    HUD.querySelector('.HUD-info').innerHTML = closestMessage;
+
+    if (closestImage.distance < 100) {
+      if (HUD.classList.contains('visible')) { return; }
+
+      HUD.classList.add('visible');
+    } else {
+      HUD.classList.remove('visible');
+    }
   }());
 }
 

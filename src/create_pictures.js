@@ -32,7 +32,7 @@ export default async function(scene) {
     mesh.position.set(getRandomInt(0, 1600), getRandomInt(0, 400), getRandomInt(10, 1000));
     mesh.lookAt(new THREE.Vector3(0, 0, 0));
     mesh.name = 'image';
-    mesh.title = images[i].title;
+    mesh.info = images[i];
 
     scene.add(mesh);
   }
