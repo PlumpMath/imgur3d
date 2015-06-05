@@ -14,6 +14,7 @@ export default async function(scene) {
   for (let i = 0; i < 10; i++) {
     if (images[i].is_album) continue;
     let imageUrl = images[i].link;
+    console.log(imageUrl);
     let geometry = new THREE.BoxGeometry(100, 100, 5);
     let blankMaterial = new THREE.MeshPhongMaterial({ color: 0xFFFFFF });
     let material = new THREE.MeshPhongMaterial({

@@ -3,11 +3,35 @@ import { UNIT_SIZE } from './constants';
 
 export default function(scene, objects) {
   const MAP_WIDTH = 20;
+  THREE.ImageUtils.crossOrigin = '';
+
+  let imageUrl = 'http://i.imgur.com/xhTUQwZ.gif';
+
+  var texture = THREE.ImageUtils.loadTexture( imageUrl );
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set( 1, 2 );
+
+  let blankMaterial = new THREE.MeshPhongMaterial({ color: 0xFFFFFF });
+  let material = new THREE.MeshPhongMaterial({
+    map: texture,
+    color: 0xFFFFFF
+  });
+
+  let materials = [
+    blankMaterial,
+    blankMaterial,
+    material,
+    blankMaterial,
+    blankMaterial,
+    blankMaterial
+  ];
 
   const floor = new THREE.Mesh(
     new THREE.BoxGeometry(MAP_WIDTH * UNIT_SIZE, 10, MAP_WIDTH * UNIT_SIZE),
-    new THREE.MeshLambertMaterial({ color: 0xEDCBA0 })
+    new THREE.MeshFaceMaterial(materials)
   );
+
   floor.position.set(0, -10, 0);
   scene.add(floor);
   objects.floor = floor;
