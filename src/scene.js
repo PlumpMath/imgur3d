@@ -22,32 +22,34 @@ export default function(scene, objects) {
   scene.add(floor);
   objects.floor = floor;
 
-  const cube = new THREE.Mesh(
+  const sphere = new THREE.Mesh(
     new THREE.SphereGeometry(20, 10, 10),
     new THREE.MeshLambertMaterial({ color: 0x00FF00 })
   );
-  cube.position.set(0, 0, 0);
-  scene.add(cube);
-  objects.baseCube = cube;
+  sphere.position.set(0, 0, 0);
+  scene.add(sphere);
+  objects.baseCube = sphere;
 
-  const directionalLight1 = new THREE.DirectionalLight(0xFFFFFF, 0.7);
-  directionalLight1.position.set(0.5, 1, 0.5);
+  const directionalLight1 = new THREE.DirectionalLight(0xFFFFFF, 0.5);
+  directionalLight1.position.set(-100, 0, 0);
   scene.add(directionalLight1);
+  //
+  //const directionalLight2 = new THREE.DirectionalLight(0xFFFFFF, 0.5);
+  //directionalLight2.position.set(-0.5, -1, -0.5);
+  //scene.add(directionalLight2);
 
-  const directionalLight2 = new THREE.DirectionalLight(0xFFFFFF, 0.5);
-  directionalLight2.position.set(-0.5, -1, -0.5);
-  scene.add(directionalLight2);
 
-  const hemisphereLight = new THREE.HemisphereLight(0xFFFFFF, 0x000000, 0.8);
-  scene.add(hemisphereLight);
+  // // This (or some other directional / point light) would be neat to have it follow the mouse and act as a 'flashlight', lighting up images as you hover near
+  //const hemisphereLight = new THREE.HemisphereLight(0xFFFFFF, 0x000000, 0.8);
+  //scene.add(hemisphereLight);
 
   objects.lights = {
     directional: [
-      directionalLight1,
-      directionalLight2
+      directionalLight1
+      //directionalLight2
     ],
     hemisphere: [
-      hemisphereLight
+      //hemisphereLight
     ]
   };
 }
