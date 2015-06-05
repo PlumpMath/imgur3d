@@ -1,5 +1,6 @@
 import THREE from 'three';
 import fetchImages from './fetch_images';
+import setupTweening from './tweening';
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -8,6 +9,7 @@ function getRandomInt(min, max) {
 export default async function(scene) {
   THREE.ImageUtils.crossOrigin = '';
   const images = await fetchImages();
+  const imageObjects = [];
 
   for (let i = 0; i < 30; i++) {
     if (images[i].is_album) continue;
@@ -35,5 +37,7 @@ export default async function(scene) {
     mesh.info = images[i];
 
     scene.add(mesh);
+    imageObjects.push(mesh);
   }
+  setupTweening(imageObjects);
 }

@@ -1,8 +1,11 @@
 import THREE from 'three';
+import TWEEN from 'tween.js';
 
 export default function(scene, camera, renderer, controls, clock, HUD) {
   (function animate() {
     requestAnimationFrame(animate);
+
+    TWEEN.update();
 
     renderer.render(scene, camera);
 

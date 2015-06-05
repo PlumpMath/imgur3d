@@ -10,6 +10,7 @@ export default function() {
   scene.fog = THREE.FogExp2(0xD6F1FF, 0.0005);
 
   const ASPECT = WIDTH / HEIGHT;
+  const objects = {};
   const camera = new THREE.PerspectiveCamera(75, ASPECT, 1, 10000);
   camera.position.y = UNIT_SIZE * 0.2;
   camera.position.z = UNIT_SIZE * 0.2;
@@ -28,5 +29,5 @@ export default function() {
 
   document.body.appendChild(renderer.domElement);
 
-  return { scene, camera, renderer, controls, clock };
+  return { scene, objects, camera, renderer, controls, clock };
 }
