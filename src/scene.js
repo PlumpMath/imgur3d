@@ -8,14 +8,15 @@ export default function(scene, objects) {
     new THREE.BoxGeometry(MAP_WIDTH * UNIT_SIZE, 10, MAP_WIDTH * UNIT_SIZE),
     new THREE.MeshLambertMaterial({ color: 0xEDCBA0 })
   );
+  floor.position.set(0, -10, 0);
   scene.add(floor);
   objects.floor = floor;
 
   const cube = new THREE.Mesh(
-    new THREE.BoxGeometry(100, 100, 100),
+    new THREE.SphereGeometry(20, 10, 10),
     new THREE.MeshLambertMaterial({ color: 0x00FF00 })
   );
-  cube.position.set(UNIT_SIZE, 50, 0);
+  cube.position.set(0, 0, 0);
   scene.add(cube);
   objects.baseCube = cube;
 
