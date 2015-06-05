@@ -9,7 +9,7 @@ import createHUD from './create_hud';
 const { scene, objects, camera, renderer, controls, clock } = init();
 const HUD = createHUD();
 setupScene(scene, objects);
-createPictures(scene);
+createPictures(scene, objects);
 //setupTweening(objects.basecube);
-animate(scene, camera, renderer, controls, clock, HUD);
+animate(scene, objects, camera, renderer, controls, clock, HUD);
 

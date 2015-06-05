@@ -15,12 +15,13 @@ export default function(objects) {
         let maxTweenDelay = 1800;
         let minTweenDelay = 1000;
         let tweenDelay = Math.random() * (maxTweenDelay - minTweenDelay + 1) + minTweenDelay;
+        let easing = TWEEN.Easing.Elastic.InOut;
 
         const tweenHead = new TWEEN.Tween(position).to(target, tweenDelay)
-            .easing(TWEEN.Easing.Back.Out)
+            .easing(easing)
             .onUpdate(update);
         const tweenBack = new TWEEN.Tween(position).to(targetBack, tweenDelay)
-            .easing(TWEEN.Easing.Back.In)
+            .easing(easing)
             .onUpdate(update);
 
         tweenHead.chain(tweenBack);

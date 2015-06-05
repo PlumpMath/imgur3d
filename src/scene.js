@@ -33,10 +33,10 @@ export default function(scene, objects) {
   const directionalLight1 = new THREE.DirectionalLight(0xFFFFFF, 0.5);
   directionalLight1.position.set(-100, 0, 0);
   scene.add(directionalLight1);
-  //
-  //const directionalLight2 = new THREE.DirectionalLight(0xFFFFFF, 0.5);
-  //directionalLight2.position.set(-0.5, -1, -0.5);
-  //scene.add(directionalLight2);
+
+  const directionalLight2 = new THREE.DirectionalLight(0xFFFFFF, 0.5);
+  directionalLight2.position.set(100,0,0);
+  scene.add(directionalLight2);
 
 
   // // This (or some other directional / point light) would be neat to have it follow the mouse and act as a 'flashlight', lighting up images as you hover near

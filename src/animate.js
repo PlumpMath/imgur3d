@@ -1,7 +1,7 @@
 import THREE from 'three';
 import TWEEN from 'tween.js';
 
-export default function(scene, camera, renderer, controls, clock, HUD) {
+export default function(scene, objects, camera, renderer, controls, clock, HUD) {
   (function animate() {
     requestAnimationFrame(animate);
 
@@ -12,6 +12,8 @@ export default function(scene, camera, renderer, controls, clock, HUD) {
     const delta = clock.getDelta();
     controls.update(delta);
 
+
+    // Display HUD
     let closestImage = {
       distance: 1000,
       info: null
@@ -42,6 +44,15 @@ export default function(scene, camera, renderer, controls, clock, HUD) {
     } else {
       HUD.classList.remove('visible');
     }
+
+
+    // follow camera
+    for (let i=0; i<objects.images.length; i++){
+      objects.images[i].lookAt(new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z));
+    }
+
+
+
   }());
 }
 

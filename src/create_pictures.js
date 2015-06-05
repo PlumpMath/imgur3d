@@ -6,10 +6,10 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export default async function(scene) {
+export default async function(scene, objects) {
   THREE.ImageUtils.crossOrigin = '';
   const images = await fetchImages();
-  const imageObjects = [];
+  objects.images = [];
 
   for (let i = 0; i < 10; i++) {
     if (images[i].is_album) continue;
@@ -38,7 +38,7 @@ export default async function(scene) {
     mesh.info = images[i];
 
     scene.add(mesh);
-    imageObjects.push(mesh);
+    objects.images.push(mesh);
   }
-  setupTweening(imageObjects);
+  setupTweening(objects.images);
 }
