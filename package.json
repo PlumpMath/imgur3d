@@ -26,6 +26,7 @@
     "browserify": "^10.2.3",
     "isomorphic-fetch": "^2.1.0",
     "three": "^0.71.0",
+    "tween.js": "^0.14.0",
     "watchify": "^3.2.1"
   }
 }
