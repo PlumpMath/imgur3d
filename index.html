@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8' />
+    <title>imgur3d</title>
+    <link rel='stylesheet' type='text/css' href='css/reset.css' />
+    <link rel="stylesheet" href="css/main.css"/>
+</head>
+<body>
+  <div id="wrapper">
+    <span class="Glass"></span>
+    <span class="Systems"><var></var> o2</span>
+    <span class="Breath"></span>
+  </div>
+
+  <script type="application/x-glsl" id="sky-vertex">
+    varying vec2 vUV;
+
+    void main() {
+      vUV = uv;
+      vec4 pos = vec4(position, 1.0);
+      gl_Position = projectionMatrix * modelViewMatrix * pos;
+    }
+  </script>
+
+  <script type="application/x-glsl" id="sky-fragment">
+    uniform sampler2D texture;
+    varying vec2 vUV;
+
+    void main() {
+      vec4 sample = texture2D(texture, vUV);
+      gl_FragColor = vec4(sample.xyz, sample.w);
+    }
+  </script>
+
+  <script src='app.js'></script>
+</body>
+</html>

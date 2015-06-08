@@ -1,0 +1,33 @@
+{
+  "name": "imgur3d",
+  "version": "0.0.1",
+  "description": "",
+  "main": "public/js/app.js",
+  "scripts": {
+    "startDev": "watchify src/main.js -o public/app.js -d -v"
+  },
+  "author": "Imgur",
+  "license": "MIT",
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "optional": [
+            "es7.asyncFunctions"
+          ]
+        }
+      ]
+    ]
+  },
+  "dependencies": {
+    "babel": "^5.4.7",
+    "babelify": "^6.1.2",
+    "browserify": "^10.2.3",
+    "isomorphic-fetch": "^2.1.0",
+    "three": "^0.71.0",
+    "tween.js": "^0.14.0",
+    "velocity-animate": "^1.2.2",
+    "watchify": "^3.2.1"
+  }
+}
