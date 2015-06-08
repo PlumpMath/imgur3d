@@ -2,9 +2,11 @@ import THREE from 'three';
 import FirstPersonControls from './first_person_controls';
 import PointerLock from './pointer_lock';
 import { UNIT_SIZE, WIDTH, HEIGHT } from './constants';
+import fancy from './fancy';
 
 export default function() {
   const clock = new THREE.Clock();
+  fancy(); // do fancy stuff
 
   const scene = new THREE.Scene();
   scene.fog = THREE.FogExp2(0xD6F1FF, 0.0005);
@@ -12,8 +14,7 @@ export default function() {
   const ASPECT = WIDTH / HEIGHT;
   const objects = {};
   const camera = new THREE.PerspectiveCamera(75, ASPECT, 1, 10000);
-  camera.position.x = -350;
-  camera.position.y = 350;
+  camera.position.set(500, 1500, 500);
 
   scene.add(camera);
 
@@ -27,7 +28,9 @@ export default function() {
   renderer.setSize(WIDTH, HEIGHT);
   renderer.domElement.style.backgroundColor = 'rgb(0, 0, 150)';
 
-  document.body.appendChild(renderer.domElement);
+  const container = document.querySelector('#wrapper');
+
+  container.appendChild(renderer.domElement);
 
   return { scene, objects, camera, renderer, controls, clock };
 }

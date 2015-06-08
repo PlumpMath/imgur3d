@@ -6,12 +6,17 @@ import animate from './animate';
 import createPictures from './create_pictures';
 import createHUD from './create_hud';
 import setupRoom from './setup_room';
+import createPeople from './create_people';
 
-const { scene, objects, camera, renderer, controls, clock } = init();
-const HUD = createHUD();
-setupScene(scene, objects);
-createPictures(scene, objects);
-setupRoom(scene);
-//setupTweening(objects.basecube);
-animate(scene, objects, camera, renderer, controls, clock, HUD);
+document.addEventListener('click', (e) => {
+  e.preventDefault();
 
+  const { scene, objects, camera, renderer, controls, clock } = init();
+  const HUD = createHUD();
+  setupScene(scene, objects);
+  createPictures(scene, objects);
+  setupRoom(scene);
+  createPeople(scene);
+  animate(scene, objects, camera, renderer, controls, clock, HUD);
+
+});

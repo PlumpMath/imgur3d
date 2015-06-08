@@ -1,59 +1,51 @@
 import THREE from 'three';
 
 export default function(scene) {
-  const roomGroup = new THREE.Object3D();
+  function buildHallwayLamps(group) {
+    const jsonLoader = new THREE.JSONLoader();
+    jsonLoader.load('assets/lamp.json', (obj) => {
+      obj.position.set(10, 30, 10);
+      scene.add(obj);
+    });
 
-  const wallLeft = new THREE.Mesh(
-    new THREE.PlaneGeometry(150, 150),
-    new THREE.MeshPhongMaterial({ color: 0xffffff })
-  );
-  wallLeft.material.side = THREE.DoubleSide;
-  wallLeft.rotation.y = Math.PI / 2;
-  wallLeft.position.x = -75;
-  wallLeft.position.z = 0;
-  roomGroup.add(wallLeft);
+    for (let i = 0; i < 8; i ++) {
+      const lamp = new THREE.PointLight(0xcc00cc, 1, 350);
+      lamp.position.set(i * 200 - 500, 160, 0);
+      lamp.name = 'lamp'
+      group.add(lamp);
+      // group.add(new THREE.PointLightHelper(lamp), 1);
+    }
 
-  const wallRight = wallLeft.clone();
-  wallRight.position.x = 75;
-  roomGroup.add(wallRight);
+    for (let i = 0; i < 10; i ++) {
+      const lamp = new THREE.PointLight(0xcccc00, 1, 350);
+      lamp.position.set(0, 160, i * 200 - 1000);
+      lamp.name = 'lamp'
+      group.add(lamp);
+      // group.add(new THREE.PointLightHelper(lamp), 1);
+    }
+  }
 
-  const wallBack = wallLeft.clone();
-  wallBack.rotation.y = 0;
-  wallBack.position.y = 65;
-  wallBack.position.x = 0;
-  wallBack.position.z = -75;
-  roomGroup.add(wallBack);
+  const buildingGroup = new THREE.Object3D();
+  const jsonLoader = new THREE.JSONLoader();
+  jsonLoader.load('assets/3dimgur_textures.js', (geometry, materials) => {
+    for (let i = 0; i < materials.length; i++) {
+      materials[i].side = THREE.DoubleSide;
+    }
 
-  const doorWall = new THREE.Shape();
-  doorWall.moveTo(0, 0);
-  doorWall.lineTo(65, 0);
-  doorWall.lineTo(65, 50);
-  doorWall.lineTo(105, 50);
-  doorWall.lineTo(105, 0);
-  doorWall.lineTo(150, 0);
-  doorWall.lineTo(150, 100);
-  doorWall.lineTo(0, 100);
-  doorWall.lineTo(0, 0);
-  const dWall = new THREE.Mesh(
-    new THREE.ShapeGeometry(doorWall),
-    new THREE.MeshPhongMaterial({ color: 0xffffff })
-  );
-  dWall.material.side = THREE.DoubleSide;
-  dWall.position.set(-75, -10, 75);
-  roomGroup.add(dWall);
+    const buildingMesh = new THREE.Mesh(
+      geometry,
+      new THREE.MeshFaceMaterial(materials)
+    );
 
-  const interiorLamp = new THREE.PointLight(0x33ff00, 1, 150);
-  interiorLamp.position.set(0, 20, 0);
-  roomGroup.add(interiorLamp);
+    buildingMesh.position.set(0, 0, 0);
+    buildingMesh.scale.set(100, 100, 100);
 
-  const exteriorLampLeft = new THREE.PointLight(0x0033ff, 1, 150);
-  exteriorLampLeft.position.set(-50, 10, 120);
-  roomGroup.add(exteriorLampLeft);
+    buildingGroup.add(buildingMesh);
 
-  const exteriorLampRight = exteriorLampLeft.clone();
-  exteriorLampRight.position.x = 50;
-  roomGroup.add(exteriorLampRight);
+    buildHallwayLamps(buildingGroup);
 
-  roomGroup.position.set(100, 10, 30);
-  scene.add(roomGroup);
+    buildingGroup.position.set(0, -75, 0);
+    buildingGroup.name = 'buildingGroup';
+    scene.add(buildingGroup);
+  });
 }
