@@ -8,9 +8,9 @@ import createHUD from './create_hud';
 import setupRoom from './setup_room';
 import createPeople from './create_people';
 
-document.addEventListener('click', (e) => {
-  e.preventDefault();
+let toggle = false;
 
+window.onload = function() {
   const { scene, objects, camera, renderer, controls, clock } = init();
   const HUD = createHUD();
   setupScene(scene, objects);
@@ -18,5 +18,5 @@ document.addEventListener('click', (e) => {
   setupRoom(scene);
   createPeople(scene);
   animate(scene, objects, camera, renderer, controls, clock, HUD);
+}
 
-});
