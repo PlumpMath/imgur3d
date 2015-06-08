@@ -90,37 +90,38 @@ export default function ( object, domElement, objects) {
 
     event.preventDefault();
     event.stopPropagation();
-    //
-    //if ( this.activeLook ) {
-    //
-    //  switch ( event.button ) {
-    //
-    //    case 0: this.moveForward = true; break;
-    //    case 2: this.moveBackward = true; break;
-    //
-    //  }
-    //
-    //}
+
+    if ( this.activeLook ) {
+
+      switch ( event.button ) {
+
+        case 0: this.moveForward = true; break;
+        case 2: this.moveBackward = true; break;
+
+      }
+
+    }
+
 
     this.mouseDragOn = true;
 
   };
 
   this.onMouseUp = function ( event ) {
-    //
-    //event.preventDefault();
-    //event.stopPropagation();
-    //
-    //if ( this.activeLook ) {
-    //
-    //  switch ( event.button ) {
-    //
-    //    case 0: this.moveForward = false; break;
-    //    case 2: this.moveBackward = false; break;
-    //
-    //  }
-    //
-    //}
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    if ( this.activeLook ) {
+
+      switch ( event.button ) {
+
+        case 0: this.moveForward = false; break;
+        case 2: this.moveBackward = false; break;
+
+      }
+
+    }
 
     this.mouseDragOn = false;
 
@@ -213,8 +214,76 @@ export default function ( object, domElement, objects) {
 
     var actualMoveSpeed = delta * this.movementSpeed;
 
-    if ( this.moveForward || ( this.autoForward && !this.moveBackward ) ) this.object.translateZ( - ( actualMoveSpeed + this.autoSpeedFactor ) );
-    if ( this.moveBackward ) this.object.translateZ( actualMoveSpeed );
+    //if ( this.moveForward || ( this.autoForward && !this.moveBackward ) ) this.object.translateZ( - ( actualMoveSpeed + this.autoSpeedFactor ) );
+    //if ( this.moveBackward ) this.object.translateZ( actualMoveSpeed );
+
+
+    if ( this.moveForward ){
+      //find the photo clicked and tween it to the camera
+
+      this.raycaster.setFromCamera( this.mouse, this.object );
+      var intersectClicked = this.raycaster.intersectObjects( objects.images );
+
+      if (intersectClicked.length >= 1){
+
+        //intersects[0].object.position.set(0,0,0)
+
+        intersectClicked[0].object.tweenHead.stop();
+        intersectClicked[0].object.tweenBack.stop();
+
+
+
+        const position = {
+          x: intersectClicked[0].object.position.x,
+          y: intersectClicked[0].object.position.y,
+          z: intersectClicked[0].object.position.z,
+          rotY: intersectClicked[0].object.rotation.y
+        };
+        const target = {
+          x: this.object.position.x + 90,
+          y: this.object.position.y - 50,
+          z: this.object.position.z,
+          rotY: Math.PI * 1.65
+        };
+        //const targetBack = { y: object.position.y };
+
+        const objectClicked = intersectClicked[0].object
+        const update = function(){
+
+          objectClicked.position.x = position.x;
+          objectClicked.position.y = position.y;
+          objectClicked.position.z = position.z;
+          objectClicked.rotation.y = position.rotY;
+        };
+
+        //let maxTweenDelay = 7800;
+        //let minTweenDelay = 3000;
+        //let tweenDelay = Math.random() * (maxTweenDelay - minTweenDelay + 1) + minTweenDelay;
+        let easing = TWEEN.Easing.Circular.InOut;
+
+        const tweenHead = new TWEEN.Tween(position).to(target, 1000)
+            .easing(easing)
+            .onUpdate(update);
+        //const tweenBack = new TWEEN.Tween(position).to(targetBack, tweenDelay)
+        //    .easing(easing)
+        //    .onUpdate(update);
+
+        //tweenHead.chain(tweenBack);
+        //tweenBack.chain(tweenHead);
+
+        tweenHead.start();
+
+
+
+
+
+      }
+
+
+    }
+
+
+
 
     if ( this.moveLeft ) this.object.translateX( - actualMoveSpeed );
     if ( this.moveRight ) this.object.translateX( actualMoveSpeed );
@@ -288,7 +357,7 @@ export default function ( object, domElement, objects) {
   this.domElement.addEventListener( 'contextmenu', function ( event ) { event.preventDefault(); }, false );
 
   this.domElement.addEventListener( 'mousemove', bind( this, this.onMouseMove ), false );
-  this.domElement.addEventListener( 'mousedown', bind( this, this.onMouseDown ), false );
+  this.domElement.addEventListener( 'mousedown', bind( this, this.onMouseDown, objects ), false );
   this.domElement.addEventListener( 'mouseup', bind( this, this.onMouseUp ), false );
 
   window.addEventListener( 'keydown', bind( this, this.onKeyDown ), false );

@@ -28,6 +28,10 @@ export default function(objects) {
         tweenBack.chain(tweenHead);
 
         tweenHead.start();
+
+        object.tweenHead = tweenHead;
+        object.tweenBack = tweenBack;
+
     };
 
     if (objects.constructor === Array){
