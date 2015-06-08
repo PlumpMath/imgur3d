@@ -1,4 +1,5 @@
 import THREE from 'three';
+import TWEEN from 'tween.js';
 
 /**
  * @author mrdoob / http://mrdoob.com/
@@ -6,10 +7,13 @@ import THREE from 'three';
  * @author paulirish / http://paulirish.com/
  */
 
-export default function ( object, domElement ) {
+export default function ( object, domElement, objects) {
 
   this.object = object;
   this.target = new THREE.Vector3( 0, 0, 0 );
+
+  this.raycaster = new THREE.Raycaster();
+  this.mouse = new THREE.Vector2();
 
   this.domElement = ( domElement !== undefined ) ? domElement : document;
 
@@ -86,37 +90,37 @@ export default function ( object, domElement ) {
 
     event.preventDefault();
     event.stopPropagation();
-
-    if ( this.activeLook ) {
-
-      switch ( event.button ) {
-
-        case 0: this.moveForward = true; break;
-        case 2: this.moveBackward = true; break;
-
-      }
-
-    }
+    //
+    //if ( this.activeLook ) {
+    //
+    //  switch ( event.button ) {
+    //
+    //    case 0: this.moveForward = true; break;
+    //    case 2: this.moveBackward = true; break;
+    //
+    //  }
+    //
+    //}
 
     this.mouseDragOn = true;
 
   };
 
   this.onMouseUp = function ( event ) {
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    if ( this.activeLook ) {
-
-      switch ( event.button ) {
-
-        case 0: this.moveForward = false; break;
-        case 2: this.moveBackward = false; break;
-
-      }
-
-    }
+    //
+    //event.preventDefault();
+    //event.stopPropagation();
+    //
+    //if ( this.activeLook ) {
+    //
+    //  switch ( event.button ) {
+    //
+    //    case 0: this.moveForward = false; break;
+    //    case 2: this.moveBackward = false; break;
+    //
+    //  }
+    //
+    //}
 
     this.mouseDragOn = false;
 
@@ -135,6 +139,10 @@ export default function ( object, domElement ) {
       this.mouseY = event.pageY - this.domElement.offsetTop - this.viewHalfY;
 
     }
+
+    //for raycaster
+    this.mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+    this.mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
   };
 
@@ -186,7 +194,7 @@ export default function ( object, domElement ) {
 
   };
 
-  this.update = function( delta ) {
+  this.update = function( delta, objects ) {
 
     if ( this.enabled === false ) return;
 
@@ -255,17 +263,22 @@ export default function ( object, domElement ) {
 
     //custom camera positioning
     //only use laft and right most quarters of the screen to navigate along X axis
+
+
+    this.raycaster.setFromCamera( this.mouse, this.object );
+    var intersects = this.raycaster.intersectObjects( [objects.floor, objects.raytracePlane] );
+
+    if (intersects.length >= 1){
+      objects.mouseSphere.position.set(intersects[0].point.x, intersects[0].point.y, intersects[0].point.z);
+      objects.mouseLight.position.set(intersects[0].point.x, intersects[0].point.y + 100, intersects[0].point.z);
+    }
+
     if (Math.abs(this.mouseX) > 0.5 * this.viewHalfX){
       var sign = this.mouseX?this.mouseX<0?-1:1:0;
       var scaledX = sign * 0.5 * this.viewHalfX;
       var addPos = 0.005 * (Math.pow(Math.abs(this.mouseX - scaledX), 1.25));
       this.object.position.z += sign * addPos;
     }
-
-
-    
-
-
 
 
 

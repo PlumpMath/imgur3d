@@ -10,7 +10,7 @@ export default function(scene, objects, camera, renderer, controls, clock, HUD) 
     renderer.render(scene, camera);
 
     const delta = clock.getDelta();
-    controls.update(delta);
+    controls.update(delta, objects);
 
 
     // Display HUD

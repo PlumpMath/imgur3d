@@ -11,7 +11,7 @@ export default async function(scene, objects) {
   const images = await fetchImages();
   objects.images = [];
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 30; i++) {
     if (images[i].is_album) continue;
     let imageUrl = images[i].link;
     console.log(imageUrl);
@@ -32,7 +32,7 @@ export default async function(scene, objects) {
     ];
 
     let mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
-    mesh.position.set(getRandomInt(0, 400), getRandomInt(200, 300), getRandomInt(-600, 600));
+    mesh.position.set(getRandomInt(-100, 400), getRandomInt(100, 200), getRandomInt(-600, 3000));
     mesh.lookAt(new THREE.Vector3(-350, 350, 0));
     mesh.name = 'image';
     mesh.info = images[i];
