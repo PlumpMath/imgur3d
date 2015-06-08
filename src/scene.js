@@ -48,7 +48,7 @@ export default function(scene, objects) {
   //setup a sphere that follows the mouse
   objects.mouseSphere = new THREE.Mesh(
       new THREE.SphereGeometry(30, 20, 20),
-      new THREE.MeshLambertMaterial({ color: 0xFFFF00 })
+      new THREE.MeshLambertMaterial({ color: 0xFFFFFF })
   );
 
   //also a flashlight
