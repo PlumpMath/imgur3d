@@ -12,8 +12,8 @@ export default function(objects) {
             object.position.y = position.y;
         };
 
-        let maxTweenDelay = 1800;
-        let minTweenDelay = 1000;
+        let maxTweenDelay = 7800;
+        let minTweenDelay = 3000;
         let tweenDelay = Math.random() * (maxTweenDelay - minTweenDelay + 1) + minTweenDelay;
         let easing = TWEEN.Easing.Circular.InOut;
 

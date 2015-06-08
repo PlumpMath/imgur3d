@@ -11,7 +11,7 @@ const { scene, objects, camera, renderer, controls, clock } = init();
 const HUD = createHUD();
 setupScene(scene, objects);
 createPictures(scene, objects);
-setupRoom(scene);
+//setupRoom(scene);
 //setupTweening(objects.basecube);
 animate(scene, objects, camera, renderer, controls, clock, HUD);
 

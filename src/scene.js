@@ -5,16 +5,16 @@ export default function(scene, objects) {
   const MAP_WIDTH = 20;
   THREE.ImageUtils.crossOrigin = '';
 
-  let imageUrl = 'http://i.imgur.com/riembhY.jpg'; // img/grid.jpg doesn't work due to cross origin crap
+  let imageUrl = 'http://i.imgur.com/Lv5n6Ch.png'; // img/grid.jpg doesn't work due to cross origin crap
   var texture = THREE.ImageUtils.loadTexture( imageUrl );
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set( 10, 10 );
+  texture.repeat.set( 15, 100 );
   let material = new THREE.MeshBasicMaterial({
     map: texture,
     side: THREE.BackSide
   });
   const floor = new THREE.Mesh(
-    new THREE.PlaneGeometry(1000,1000),
+    new THREE.PlaneGeometry(3000,20000),
       material
   );
   floor.position.set(0, 0, 0);
@@ -23,7 +23,7 @@ export default function(scene, objects) {
   objects.floor = floor;
 
   const sphere = new THREE.Mesh(
-    new THREE.SphereGeometry(20, 10, 10),
+    new THREE.SphereGeometry(30, 20, 20),
     new THREE.MeshLambertMaterial({ color: 0x00FF00 })
   );
   sphere.position.set(0, 0, 0);

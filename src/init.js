@@ -14,6 +14,7 @@ export default function() {
   const camera = new THREE.PerspectiveCamera(75, ASPECT, 1, 10000);
   camera.position.x = -350;
   camera.position.y = 350;
+  camera.lookAt(new THREE.Vector3(0,100,0));
 
   scene.add(camera);
 

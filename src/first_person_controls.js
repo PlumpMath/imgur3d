@@ -251,7 +251,23 @@ export default function ( object, domElement ) {
     targetPosition.y = position.y + 100 * Math.cos( this.phi );
     targetPosition.z = position.z + 100 * Math.sin( this.phi ) * Math.sin( this.theta );
 
-    this.object.lookAt( targetPosition );
+    //this.object.lookAt( targetPosition );
+
+    //custom camera positioning
+    //only use laft and right most quarters of the screen to navigate along X axis
+    if (Math.abs(this.mouseX) > 0.5 * this.viewHalfX){
+      var sign = this.mouseX?this.mouseX<0?-1:1:0;
+      var scaledX = sign * 0.5 * this.viewHalfX;
+      var addPos = 0.005 * (Math.pow(Math.abs(this.mouseX - scaledX), 1.25));
+      this.object.position.z += sign * addPos;
+    }
+
+
+    
+
+
+
+
 
   };
 
