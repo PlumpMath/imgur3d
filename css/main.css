@@ -36,7 +36,7 @@ html {
 }
 
 .Glass {
-  background-image: url('/assets/bg.png');
+  background-image: url('../assets/bg.png');
   background-size: contain;
   position: absolute;
   top: 0;
@@ -67,7 +67,7 @@ html {
 }
 
 .Breath {
-  background-image: url('/assets/breath.png');
+  background-image: url('../assets/breath.png');
   background-size: cover;
   width: 800px;
   height: 300px;
